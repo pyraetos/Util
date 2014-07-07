@@ -57,6 +57,12 @@ public abstract class Sys{
 		return Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
 	}
 	
+	public static int dualRandom(int one, int two, int three, int four){
+		if(chance(.5))
+			return RANDOM.nextInt(two - one) + one;
+		return RANDOM.nextInt(four - three) + three;
+	}
+	
 	public static void debug(Object o){
 		System.out.println(o);
 	}
