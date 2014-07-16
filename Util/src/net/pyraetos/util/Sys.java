@@ -1,7 +1,10 @@
 package net.pyraetos.util;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Random;
@@ -21,6 +24,27 @@ public abstract class Sys{
 
 	public static void thread(Runnable r){
 		new Thread(r).start();
+	}
+	
+	public static double simplifyAngled(double angle){
+		while(angle < 0) angle += 360;
+		while(angle > 360f) angle -= 360f;
+		return angle;
+	}
+	
+	public static double simplifyAngler(double theta){
+		while(theta < 0) theta += (2f * Math.PI);
+		while(theta > (2f * Math.PI)) theta -= (2f * Math.PI);
+		return theta;
+	}
+	
+	public static boolean between(double theta, double min, double max){
+		theta = simplifyAngler(theta);
+		min = simplifyAngler(min);
+		max = simplifyAngler(max);
+		if(min > max)
+			return theta >= min || theta <= max;
+		return theta <= max && theta >= min;
 	}
 	
 	public static boolean equal(Object...objects){
@@ -43,6 +67,23 @@ public abstract class Sys{
 	
 	public static Component space(){
 		return Box.createRigidArea(new Dimension(10, 10));
+	}
+	
+	public static Color randomColor(){
+		int red = RANDOM.nextInt(256);
+		int green = RANDOM.nextInt(256);
+		int blue = RANDOM.nextInt(256);
+		return new Color(red, green, blue);
+	}
+	
+	public static InputStream getURLStream(String url){
+		try{
+			URL u = new URL(url);
+			return u.openStream();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static <E> Set<E> concurrentSet(Class<E> type){
