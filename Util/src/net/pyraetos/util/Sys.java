@@ -20,7 +20,7 @@ public abstract class Sys{
 	public static final byte EAST = 2;
 	public static final byte WEST = 3;
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("########.##");
-	private static final Random RANDOM = new Random();
+	public static final Random RANDOM = new Random();
 
 	public static void thread(Runnable r){
 		new Thread(r).start();
@@ -67,6 +67,20 @@ public abstract class Sys{
 	
 	public static Component space(){
 		return Box.createRigidArea(new Dimension(10, 10));
+	}
+	
+	public static double max(double... vals){
+		double v = Double.MIN_VALUE;
+		for(double d : vals)
+			v = d > v ? d : v;
+		return v;
+	}
+	
+	public static double min(double... vals){
+		double v = Double.MAX_VALUE;
+		for(double d : vals)
+			v = d < v ? d : v;
+		return v;
 	}
 	
 	public static Color randomColor(){
