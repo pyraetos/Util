@@ -6,7 +6,9 @@ import java.awt.Dimension;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,10 +22,27 @@ public abstract class Sys{
 	public static final byte EAST = 2;
 	public static final byte WEST = 3;
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("########.##");
-	public static final Random RANDOM = new Random();
+	private static final Random RANDOM = new Random();
 
 	public static void thread(Runnable r){
 		new Thread(r).start();
+	}
+
+	public static float sin(float theta){
+		return (float)Math.sin(theta);
+	}
+	
+	public static float cos(float theta){
+		return (float)Math.cos(theta);
+	}
+	
+	public static String[] tokenize(String string, String separator){
+		String[] split = string.split(separator);
+		List<String> list = new ArrayList<String>();
+		for(String s : split)
+			if(s.length() > 0)
+				list.add(s);
+		return list.toArray(new String[list.size()]);
 	}
 	
 	public static double simplifyAngled(double angle){
@@ -57,6 +76,10 @@ public abstract class Sys{
 		return true;
 	}
 	
+	public static long time(){
+		return System.nanoTime();
+	}
+	
 	public static void sleep(long time){
 		try {
 			Thread.sleep(time);
@@ -67,20 +90,6 @@ public abstract class Sys{
 	
 	public static Component space(){
 		return Box.createRigidArea(new Dimension(10, 10));
-	}
-	
-	public static double max(double... vals){
-		double v = Double.MIN_VALUE;
-		for(double d : vals)
-			v = d > v ? d : v;
-		return v;
-	}
-	
-	public static double min(double... vals){
-		double v = Double.MAX_VALUE;
-		for(double d : vals)
-			v = d < v ? d : v;
-		return v;
 	}
 	
 	public static Color randomColor(){
@@ -146,6 +155,18 @@ public abstract class Sys{
 		System.out.println("debug");
 	}
 
+	public static void error(String s){
+		System.err.println(s);
+	}
+	
+	public static void error(Object o){
+		System.err.println(o);
+	}
+	
+	public static void error(){
+		System.err.println("Error!");
+	}
+	
 	public static boolean chance(double chance){
 		return chance(chance, new Random());
 	}
