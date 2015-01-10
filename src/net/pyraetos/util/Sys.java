@@ -1,10 +1,19 @@
 package net.pyraetos.util;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.swing.Box;
 
 public abstract class Sys{
 	
@@ -18,6 +27,44 @@ public abstract class Sys{
 	public static void thread(Runnable r){
 		new Thread(r).start();
 	}
+
+	public static float sin(float theta){
+		return (float)Math.sin(theta);
+	}
+	
+	public static float cos(float theta){
+		return (float)Math.cos(theta);
+	}
+	
+	public static String[] tokenize(String string, String separator){
+		String[] split = string.split(separator);
+		List<String> list = new ArrayList<String>();
+		for(String s : split)
+			if(s.length() > 0)
+				list.add(s);
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public static double simplifyAngled(double angle){
+		while(angle < 0) angle += 360;
+		while(angle > 360f) angle -= 360f;
+		return angle;
+	}
+	
+	public static double simplifyAngler(double theta){
+		while(theta < 0) theta += (2f * Math.PI);
+		while(theta > (2f * Math.PI)) theta -= (2f * Math.PI);
+		return theta;
+	}
+	
+	public static boolean between(double theta, double min, double max){
+		theta = simplifyAngler(theta);
+		min = simplifyAngler(min);
+		max = simplifyAngler(max);
+		if(min > max)
+			return theta >= min || theta <= max;
+		return theta <= max && theta >= min;
+	}
 	
 	public static boolean equal(Object...objects){
 		Object o = null;
@@ -29,12 +76,37 @@ public abstract class Sys{
 		return true;
 	}
 	
+	public static long time(){
+		return System.nanoTime();
+	}
+	
 	public static void sleep(long time){
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static Component space(){
+		return Box.createRigidArea(new Dimension(10, 10));
+	}
+	
+	public static Color randomColor(){
+		int red = RANDOM.nextInt(256);
+		int green = RANDOM.nextInt(256);
+		int blue = RANDOM.nextInt(256);
+		return new Color(red, green, blue);
+	}
+	
+	public static InputStream getURLStream(String url){
+		try{
+			URL u = new URL(url);
+			return u.openStream();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static <E> Set<E> concurrentSet(Class<E> type){
@@ -47,6 +119,12 @@ public abstract class Sys{
 	
 	public static Set<String> concurrentSetString(){
 		return Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+	}
+	
+	public static int dualRandom(int one, int two, int three, int four){
+		if(chance(.5))
+			return RANDOM.nextInt(two - one) + one;
+		return RANDOM.nextInt(four - three) + three;
 	}
 	
 	public static void debug(Object o){
@@ -77,6 +155,21 @@ public abstract class Sys{
 		System.out.println("debug");
 	}
 
+	public static void error(String s){
+		System.err.println(s);
+		System.exit(1);
+	}
+	
+	public static void error(Object o){
+		System.err.println(o);
+		System.exit(1);
+	}
+	
+	public static void error(){
+		System.err.println("Error!");
+		System.exit(1);
+	}
+	
 	public static boolean chance(double chance){
 		return chance(chance, new Random());
 	}
