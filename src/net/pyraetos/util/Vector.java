@@ -2,17 +2,13 @@ package net.pyraetos.util;
 
 public class Vector<T>{
 
-	protected T[] elements;
-	protected int size;
+	private T[] elements;
+	private int size;
 	
-	@SuppressWarnings("unchecked")
 	@SafeVarargs
 	public Vector(T... elements){
+		this.elements = elements;
 		size = elements.length;
-		if(size == 0)
-			this.elements = (T[]) new Object[1];
-		else
-			this.elements = elements;
 	}
 	
 	public T getX(){
@@ -44,13 +40,13 @@ public class Vector<T>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void pushBack(T value){
-		if(elements[space() - 1] != null){
-			Object[] temp = new Object[space() * 2];
-			for(int i = 0; i < size(); i++){
+	public void add(T value){
+		if(elements[elements.length - 1] != null){
+			Object[] temp = new Object[elements.length * 2];
+			for(int i = 0; i < elements.length; i++){
 				temp[i] = elements[i];
 			}
-			temp[space()] = value;
+			temp[elements.length] = value;
 			elements = (T[])temp;
 		}else{
 			elements[size] = value;
@@ -84,11 +80,9 @@ public class Vector<T>{
 	
 	@Override
 	public String toString(){
-		if(size == 0)
-			return "[]";
 		String string = "[";
-		int last = size - 1;
-		for(int i = 0; i < last; i++){
+		int last = elements.length - 1;
+		for(int i = 0; i < elements.length - 1; i++){
 			if(elements[i + 1] == null){
 				last = i;
 				break;
