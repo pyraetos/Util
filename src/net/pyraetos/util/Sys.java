@@ -92,6 +92,10 @@ public abstract class Sys{
 		return Box.createRigidArea(new Dimension(10, 10));
 	}
 	
+	public static Component space(int scaleFactor){
+		return Box.createRigidArea(new Dimension(10 * scaleFactor, 10 * scaleFactor));
+	}
+	
 	public static Color randomColor(){
 		int red = RANDOM.nextInt(256);
 		int green = RANDOM.nextInt(256);
