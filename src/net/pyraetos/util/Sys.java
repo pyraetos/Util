@@ -78,10 +78,12 @@ public abstract class Sys{
 	}
 	
 	public static long time(){
-		return System.nanoTime();
+		return System.currentTimeMillis();
 	}
 	
 	public static void sleep(long time){
+		if(time < 0)
+			return;
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
