@@ -37,8 +37,16 @@ public abstract class Sys{
 		return (float)Math.sin(theta);
 	}
 	
+	public static float asin(float theta){
+		return (float)Math.asin(theta);
+	}
+	
 	public static float cos(float theta){
 		return (float)Math.cos(theta);
+	}
+	
+	public static float acos(float theta){
+		return (float)Math.acos(theta);
 	}
 	
 	public static float tan(float theta){

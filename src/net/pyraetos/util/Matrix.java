@@ -59,25 +59,41 @@ public class Matrix implements Serializable{
 	}
 
 	public static void multiply(Matrix a, Matrix b, Matrix c){
-		c.v00 = a.v00*b.v00 + a.v10*b.v01 + a.v20*b.v02 + a.v30*b.v03;
-		c.v01 = a.v01*b.v00 + a.v11*b.v01 + a.v21*b.v02 + a.v31*b.v03;
-		c.v02 = a.v02*b.v00 + a.v12*b.v01 + a.v22*b.v02 + a.v32*b.v03;
-		c.v03 = a.v03*b.v00 + a.v13*b.v01 + a.v23*b.v02 + a.v33*b.v03;
+		float cv00 = a.v00*b.v00 + a.v10*b.v01 + a.v20*b.v02 + a.v30*b.v03;
+		float cv01 = a.v01*b.v00 + a.v11*b.v01 + a.v21*b.v02 + a.v31*b.v03;
+		float cv02 = a.v02*b.v00 + a.v12*b.v01 + a.v22*b.v02 + a.v32*b.v03;
+		float cv03 = a.v03*b.v00 + a.v13*b.v01 + a.v23*b.v02 + a.v33*b.v03;
 		
-		c.v10 = a.v00*b.v10 + a.v10*b.v11 + a.v20*b.v12 + a.v30*b.v13;
-		c.v11 = a.v01*b.v10 + a.v11*b.v11 + a.v21*b.v12 + a.v31*b.v13;
-		c.v12 = a.v02*b.v10 + a.v12*b.v11 + a.v22*b.v12 + a.v32*b.v13;
-		c.v13 = a.v03*b.v10 + a.v13*b.v11 + a.v23*b.v12 + a.v33*b.v13;
+		float cv10 = a.v00*b.v10 + a.v10*b.v11 + a.v20*b.v12 + a.v30*b.v13;
+		float cv11 = a.v01*b.v10 + a.v11*b.v11 + a.v21*b.v12 + a.v31*b.v13;
+		float cv12 = a.v02*b.v10 + a.v12*b.v11 + a.v22*b.v12 + a.v32*b.v13;
+		float cv13 = a.v03*b.v10 + a.v13*b.v11 + a.v23*b.v12 + a.v33*b.v13;
 		
-		c.v20 = a.v00*b.v20 + a.v10*b.v21 + a.v20*b.v22 + a.v30*b.v23;
-		c.v21 = a.v01*b.v20 + a.v11*b.v21 + a.v21*b.v22 + a.v31*b.v23;
-		c.v22 = a.v02*b.v20 + a.v12*b.v21 + a.v22*b.v22 + a.v32*b.v23;
-		c.v23 = a.v03*b.v20 + a.v13*b.v21 + a.v23*b.v22 + a.v33*b.v23;
+		float cv20 = a.v00*b.v20 + a.v10*b.v21 + a.v20*b.v22 + a.v30*b.v23;
+		float cv21 = a.v01*b.v20 + a.v11*b.v21 + a.v21*b.v22 + a.v31*b.v23;
+		float cv22 = a.v02*b.v20 + a.v12*b.v21 + a.v22*b.v22 + a.v32*b.v23;
+		float cv23 = a.v03*b.v20 + a.v13*b.v21 + a.v23*b.v22 + a.v33*b.v23;
 		
-		c.v30 = a.v00*b.v30 + a.v10*b.v31 + a.v20*b.v32 + a.v30*b.v33;
-		c.v31 = a.v01*b.v30 + a.v11*b.v31 + a.v21*b.v32 + a.v31*b.v33;
-		c.v32 = a.v02*b.v30 + a.v12*b.v31 + a.v22*b.v32 + a.v32*b.v33;
-		c.v33 = a.v03*b.v30 + a.v13*b.v31 + a.v23*b.v32 + a.v33*b.v33;
+		float cv30 = a.v00*b.v30 + a.v10*b.v31 + a.v20*b.v32 + a.v30*b.v33;
+		float cv31 = a.v01*b.v30 + a.v11*b.v31 + a.v21*b.v32 + a.v31*b.v33;
+		float cv32 = a.v02*b.v30 + a.v12*b.v31 + a.v22*b.v32 + a.v32*b.v33;
+		float cv33 = a.v03*b.v30 + a.v13*b.v31 + a.v23*b.v32 + a.v33*b.v33;
+		c.v00 = cv00;
+		c.v01 = cv01;
+		c.v02 = cv02;
+		c.v03 = cv03;
+		c.v10 = cv10;
+		c.v11 = cv11;
+		c.v12 = cv12;
+		c.v13 = cv13;
+		c.v20 = cv20;
+		c.v21 = cv21;
+		c.v22 = cv22;
+		c.v23 = cv23;
+		c.v30 = cv30;
+		c.v31 = cv31;
+		c.v32 = cv32;
+		c.v33 = cv33;
 	}
 	
 	public static Vector multiply(Matrix a, Vector b, float w){
