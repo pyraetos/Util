@@ -9,6 +9,10 @@ public class Vector implements Serializable{
 	protected float y;
 	protected float z;
 	
+	public Vector(Vector v){
+		this(v.getX(), v.getY(), v.getZ());
+	}
+	
 	public Vector(float x, float y, float z){
 		this.x = x;
 		this.y = y;
@@ -45,8 +49,14 @@ public class Vector implements Serializable{
 		z *= scalar;
 	}
 	
-	public static Vector multiply(Vector base, float scalar){
-		return new Vector(base.x * scalar, base.y * scalar, base.z * scalar);
+	public static void multiply(Vector base, float scalar, Vector dest){
+		dest.setX(base.x * scalar);
+		dest.setY(base.y * scalar);
+		dest.setZ(base.z * scalar);
+	}
+	
+	public static float multiply(Vector a, float wa, Vector b, float wb){
+		return a.x * b.x + a.y * b.y + a.z * b.z + wa * wb;
 	}
 	
 	@Override

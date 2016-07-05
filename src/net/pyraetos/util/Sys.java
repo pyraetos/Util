@@ -120,6 +120,10 @@ public abstract class Sys{
 		return System.currentTimeMillis();
 	}
 
+	public static void timer(long begin){
+		Sys.debug(time() - begin);
+	}
+	
 	public static String load(String filename){
 		File file = new File(filename);
 		String s = "";
@@ -258,6 +262,10 @@ public abstract class Sys{
 	
 	public static int distanceFrom(int x0, int y0, int x1, int y1){
 		return (int)Math.round(Math.sqrt(Math.pow(Math.max(x0, x1) - Math.min(x0, x1), 2) + Math.pow(Math.max(y0, y1) - Math.min(y0, y1), 2)));
+	}
+	
+	public static float distanceFrom(Vector a, Vector b){
+		return (float)Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) + Math.pow(a.z - b.z, 2));
 	}
 	
 	public static long randomSeed(){

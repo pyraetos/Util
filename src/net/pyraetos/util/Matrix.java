@@ -58,6 +58,7 @@ public class Matrix implements Serializable{
 		v30 = n30; v31 = n31; v32 = n32; v33 = n33;
 	}
 
+	
 	public static void multiply(Matrix a, Matrix b, Matrix c){
 		float cv00 = a.v00*b.v00 + a.v10*b.v01 + a.v20*b.v02 + a.v30*b.v03;
 		float cv01 = a.v01*b.v00 + a.v11*b.v01 + a.v21*b.v02 + a.v31*b.v03;
@@ -96,11 +97,16 @@ public class Matrix implements Serializable{
 		c.v33 = cv33;
 	}
 	
-	public static Vector multiply(Matrix a, Vector b, float w){
+	//Returns w
+	public static float multiply(Matrix a, Vector b, float w, Vector c){
 		float x = a.v00 * b.x + a.v01 * b.y + a.v02 * b.z + a.v03 * w;
 		float y = a.v10 * b.x + a.v11 * b.y + a.v12 * b.z + a.v13 * w;
 		float z = a.v20 * b.x + a.v21 * b.y + a.v22 * b.z + a.v23 * w;
-		return new Vector(x, y, z);
+		float ww = a.v30 * b.x + a.v31 * b.y + a.v32 * b.z + a.v33 * w;
+		c.setX(x);
+		c.setY(y);
+		c.setZ(z);
+		return ww;
 	}
 	
 	public void transpose(){
@@ -120,7 +126,6 @@ public class Matrix implements Serializable{
 				+ v30 + " " + v31 + " " + v32 + " " + v33 + "\n";
 	}
 
-	
 	@Override
 	public int hashCode(){
 		final int prime = 31;
