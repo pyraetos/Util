@@ -27,6 +27,7 @@ public abstract class Sys{
 	public static final byte EAST = 2;
 	public static final byte WEST = 3;
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("########.##");
+	private static final DecimalFormat DECIMAL_FORMAT1 = new DecimalFormat("########.#");
 	private static final Random RANDOM = new Random();
 	public static final float PI = (float)Math.PI;
 
@@ -336,5 +337,9 @@ public abstract class Sys{
 	
 	public static double round(double d){
 		return Double.parseDouble(DECIMAL_FORMAT.format(d));
+	}
+	
+	public static double round1(double d){
+		return Double.parseDouble(DECIMAL_FORMAT1.format(d));
 	}
 }
