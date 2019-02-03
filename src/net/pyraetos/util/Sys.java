@@ -26,8 +26,8 @@ public abstract class Sys{
 	public static final byte SOUTH = 1;
 	public static final byte EAST = 2;
 	public static final byte WEST = 3;
-	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("########.##");
-	private static final DecimalFormat DECIMAL_FORMAT1 = new DecimalFormat("########.#");
+	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("##########.##");
+	private static final DecimalFormat DECIMAL_FORMAT1 = new DecimalFormat("##########.#");
 	private static final Random RANDOM = new Random();
 	public static final float PI = (float)Math.PI;
 
